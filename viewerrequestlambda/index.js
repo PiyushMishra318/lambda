@@ -49,11 +49,12 @@ exports.handler = (event, context, callback) => {
   // parse the prefix, image name and extension from the uri.
   // In our case /images/image.jpg
 
-  const match = fwdUri.match(/(.*)\/(.*)\.(.*)/);
+  const match = fwdUri.match(/(images)\/(.*)(.*)\.(.*)/);
 
   let prefix = match[1]; // "images"
-  let imageName = match[2]; // "imagename"
-  let extension = match[3]; // "jpg"
+  let path = match[2] != "" ? match[2].substring(1) : null; // "folder/folder"
+  let imageName = match[3]; // "imagename"
+  let extension = match[4]; // "jpg"
 
   // read the accept header to determine if webP is supported.
   let accept = headers["accept"] ? headers["accept"][0].value : "";
@@ -61,7 +62,7 @@ exports.handler = (event, context, callback) => {
   let url = [];
   // build the new uri to be forwarded upstream
   url.push(prefix);
-
+  path ? url.push(path) : null;
   // check if dimension parameter is sent
   if (params.d) {
     url.push("resized");
@@ -72,7 +73,7 @@ exports.handler = (event, context, callback) => {
     extension = variables.webpExtension;
     url.push(variables.webpExtension);
   } else {
-    url.push(extension);
+    if (params.quality) url.push(extension);
   }
 
   // check if dimension parameter is sent
