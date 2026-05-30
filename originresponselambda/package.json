@@ -1,0 +1,11 @@
+{
+  "name": "origin-response-lambda",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CloudFront origin-response Lambda@Edge for on-demand image resizing",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "sharp": "^0.33.5"
+  }
+}

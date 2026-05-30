@@ -1,0 +1,10 @@
+{
+  "name": "viewer-request-lambda",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CloudFront viewer-request Lambda@Edge for image URL rewriting",
+  "main": "index.js",
+  "dependencies": {
+    "useragent": "^2.3.0"
+  }
+}

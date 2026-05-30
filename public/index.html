@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lambda@Edge Image Pipeline Demo</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Lambda@Edge Image Pipeline</h1>
+    <p>Interactive walkthrough of viewer-request rewrite and origin-response resize on 404.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Request parameters</h2>
+      <form id="demo-form">
+        <label>Image path <input name="path" value="/images/photo.jpg" /></label>
+        <label>Prefix <input name="prefix" value="assets/demo" /></label>
+        <label>Dimensions (d) <input name="d" value="400x300" /></label>
+        <label>Quality <input name="quality" type="number" value="80" /></label>
+        <label><input name="webp" type="checkbox" checked /> Browser supports WebP</label>
+        <button type="submit">Simulate flow</button>
+      </form>
+    </section>
+    <section id="steps"></section>
+    <pre id="out" hidden></pre>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

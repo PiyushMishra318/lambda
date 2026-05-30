@@ -1,114 +1,75 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
+# AWS Lambda@Edge — Image Pipeline
 
-<h3 align="center">Project Title</h3>
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-<div align="center">
+A small portfolio of **Lambda@Edge** functions I built during an internship. Together they power on-the-fly image delivery: rewrite requests for WebP/resized variants at the edge, and generate missing variants from S3 when the CDN returns a 404.
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+This repo is reference code — deploy it with your own S3 bucket, CloudFront distribution, and environment variables.
 
-</div>
+## Functions
 
----
+### `viewerrequestlambda/`
 
-<p align="center"> Few lines describing your project.
-    <br> 
-</p>
+**CloudFront viewer-request trigger**
 
-## 📝 Table of Contents
+- Parses query parameters (`d`, `quality`, `prefix` or legacy `project`)
+- Rewrites image URIs for resized/WebP paths based on browser support
+- Sets `Original-Resource-Type` so the origin-response handler knows the source format
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+### `originresponselambda/`
 
-## 🧐 About <a name = "about"></a>
+**CloudFront origin-response trigger**
 
-Write about 1-2 paragraphs describing the purpose of your project.
+- Runs when CloudFront gets a **404** for an image
+- Loads the original from S3, resizes/converts with **Sharp**, caches the result back to S3
+- Returns the generated image in the CloudFront response
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## Query parameters
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+| Param | Example | Purpose |
+|-------|---------|---------|
+| `prefix` | `assets/site-a` | S3 key prefix for stored images (legacy alias: `project`) |
+| `d` | `400x300` | Target width × height |
+| `quality` | `80` | Output quality when converting format |
 
-### Prerequisites
+Example request path:
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
+```text
+/images/photo.jpg?prefix=assets/site-a&d=400x300&quality=80
 ```
 
-### Installing
+## Environment
 
-A step by step series of examples that tell you how to get a development env running.
+Set on the origin-response function:
 
-Say what the step will be
-
-```
-Give the example
+```env
+S3_BUCKET=your-bucket-name
 ```
 
-And repeat
+## Project layout
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```text
+.
+├── viewerrequestlambda/   # URI rewriting at the edge
+└── originresponselambda/  # Resize + cache on 404
 ```
 
-### And coding style tests
+## Demo UI (Vercel)
 
-Explain what these tests test and why
+A simulation UI explains the viewer-request → S3 → origin-response flow without AWS credentials:
 
+```bash
+npx vercel --prod
 ```
-Give an example
-```
 
-## 🎈 Usage <a name="usage"></a>
+Open `/` and submit parameters to walk through the mocked pipeline. Production deploy still uses the Lambda@Edge functions below.
 
-Add notes about how to use the system.
+## Deploy notes
 
-## 🚀 Deployment <a name = "deployment"></a>
+1. Package each function with its `node_modules` (Lambda@Edge requires bundled dependencies).
+2. Attach **viewer-request** and **origin-response** triggers to your CloudFront distribution.
+3. Ensure the Lambda execution role can `s3:GetObject` and `s3:PutObject` on your bucket.
 
-Add additional notes about how to deploy this on a live system.
+## License
 
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
-## ✍️ Authors <a name = "authors"></a>
-
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+MIT © 2026 [Piyush Mishra](https://github.com/PiyushMishra318)
