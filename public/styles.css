@@ -18,13 +18,30 @@
   --radius: 12px;
 }
 
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.5;
+}
+
+
+header,
+.header,
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header {
@@ -45,6 +62,7 @@ body {
 }
 
 .main {
+  flex: 1;
   max-width: 900px;
   margin: 0 auto;
   padding: 1.5rem;
@@ -455,11 +473,26 @@ pre {
 }
 
 .footer {
+  margin-top: auto;
   text-align: center;
   padding: 1.5rem;
   color: var(--muted);
   font-size: 0.875rem;
   border-top: 1px solid var(--border);
+}
+
+
+.header__github {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.header__github:hover {
+  text-decoration: underline;
 }
 
 .footer a {
