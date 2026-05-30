@@ -7,8 +7,10 @@
   <title>Lambda@Edge Image Pipeline</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="theme-lambda">
+  <div class="bg-animation" aria-hidden="true"></div>
   <header class="header">
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme"><span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">&#9728;</span><span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">&#9789;</span></button>
     <h1>Lambda@Edge Image Pipeline</h1>
     <p>S3 → CloudFront → viewer-request rewrite → origin-response resize on 404.</p>
   
@@ -58,5 +60,6 @@
     <p>MIT © 2026 · <a href="https://piyushm.dev" target="_blank" rel="noopener noreferrer">piyushm.dev</a> · <a href="https://github.com/PiyushMishra318/lambda" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
   </footer>
   <script src="/app.js"></script>
+  <script src="/theme.js"></script>
 </body>
 </html>
