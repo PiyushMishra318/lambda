@@ -3,29 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lambda@Edge Image Pipeline Demo</title>
+  <meta name="description" content="Simulate S3, CloudFront, and Lambda@Edge image resize pipeline." />
+  <title>Lambda@Edge Image Pipeline</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <header>
+  <header class="header">
     <h1>Lambda@Edge Image Pipeline</h1>
-    <p>Interactive walkthrough of viewer-request rewrite and origin-response resize on 404.</p>
+    <p>S3 → CloudFront → viewer-request rewrite → origin-response resize on 404.</p>
   </header>
-  <main>
-    <section>
-      <h2>Request parameters</h2>
-      <form id="demo-form">
-        <label>Image path <input name="path" value="/images/photo.jpg" /></label>
-        <label>Prefix <input name="prefix" value="assets/demo" /></label>
-        <label>Dimensions (d) <input name="d" value="400x300" /></label>
-        <label>Quality <input name="quality" type="number" value="80" /></label>
-        <label><input name="webp" type="checkbox" checked /> Browser supports WebP</label>
-        <button type="submit">Simulate flow</button>
+  <main class="main">
+    <section class="card">
+      <h2>Simulate a request</h2>
+      <form id="demo-form" class="form">
+        <label>Image URI <input name="path" value="/images/photo.jpg" required /></label>
+        <label>Storage prefix (query: prefix or project)
+          <input name="prefix" value="my-project" />
+        </label>
+        <label>Dimensions <code>d</code> (e.g. 400x300)
+          <input name="d" value="400x300" />
+        </label>
+        <label>Quality <input name="quality" type="number" min="1" max="100" value="80" /></label>
+        <label>Accept header
+          <input name="acceptHeader" value="image/webp,image/apng,image/*" />
+        </label>
+        <label>
+          <input name="userAgentSupportsWebp" type="checkbox" checked />
+          User-Agent supports WebP (Chrome 23+ style)
+        </label>
+        <button type="submit" class="btn">Simulate flow</button>
       </form>
     </section>
-    <section id="steps"></section>
-    <pre id="out" hidden></pre>
+
+    <section class="card how">
+      <h2>How it works</h2>
+      <ol>
+        <li><strong>Viewer request</strong> rewrites <code>/images/…</code> URIs using query params and Accept / User-Agent.</li>
+        <li><strong>CloudFront</strong> fetches the variant key from S3.</li>
+        <li><strong>Origin response</strong> on 404 loads the original, resizes with Sharp, caches, returns 200.</li>
+      </ol>
+    </section>
+
+    <section id="steps" class="steps" hidden></section>
+    <section class="card">
+      <details>
+        <summary>Raw JSON response</summary>
+        <pre id="out"></pre>
+      </details>
+    </section>
   </main>
+  <footer class="footer">
+    <p>MIT © 2026 · <a href="mailto:piyush_mishra31@outlook.com">piyush_mishra31@outlook.com</a></p>
+  </footer>
   <script src="/app.js"></script>
 </body>
 </html>

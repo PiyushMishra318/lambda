@@ -54,15 +54,18 @@ S3_BUCKET=your-bucket-name
 └── originresponselambda/  # Resize + cache on 404
 ```
 
-## Demo UI (Vercel)
+## Demo
 
-A simulation UI explains the viewer-request → S3 → origin-response flow without AWS credentials:
+- **Live:** https://lambda-edge-pipeline.vercel.app
+- Set image URI, prefix, dimensions, Accept header, and WebP UA support → **Simulate flow** (matches viewer-request rewrite rules)
+
+Deploy:
 
 ```bash
 npx vercel --prod
 ```
 
-Open `/` and submit parameters to walk through the mocked pipeline. Production deploy still uses the Lambda@Edge functions below.
+Open `/` for the interactive pipeline walkthrough. Production image delivery still uses the Lambda@Edge functions below.
 
 ## Deploy notes
 

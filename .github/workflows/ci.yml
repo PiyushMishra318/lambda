@@ -16,3 +16,5 @@ jobs:
           node-version: 20
       - run: node --check viewerrequestlambda/index.js
       - run: node --check originresponselambda/index.js
+      - run: node --check api/simulate.js
+      - run: npm test

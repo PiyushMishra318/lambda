@@ -1,0 +1,10 @@
+{
+  "name": "lambda-edge-pipeline-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Lambda@Edge image pipeline with Vercel simulation UI",
+  "scripts": {
+    "test": "node --test test/simulate.test.js"
+  },
+  "license": "MIT"
+}
