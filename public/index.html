@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=IBM+Plex+Mono:wght@400&display=swap" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Simulate S3, CloudFront, and Lambda@Edge image resize pipeline." />
   <title>Lambda@Edge Image Pipeline</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body class="theme-lambda">
+<body class="theme-lambda portfolio-designed">
   <div class="bg-animation" aria-hidden="true"></div>
   <header class="header">
-    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme"><span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">&#9728;</span><span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">&#9789;</span></button>
-    <h1>Lambda@Edge Image Pipeline</h1>
+        <div class="header__top">
+      <a class="header__brand" href="https://piyushm.dev">piyushm.dev</a>
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme"><span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">&#9728;</span><span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">&#9789;</span></button>
+    </div>
+
+    <p class="eyebrow">AWS edge</p>
+      <h1>Lambda@Edge Image Pipeline</h1>
     <p>S3 → CloudFront → viewer-request rewrite → origin-response resize on 404.</p>
   
     <a class="header__github" href="https://github.com/PiyushMishra318/lambda" target="_blank" rel="noopener noreferrer">View on GitHub</a>
