@@ -12,7 +12,7 @@
 
 > The code blocks in this just uses sharp to convert the images to a mouch more suitable size and format for higher load speeds.
 
-> Learned a lot abt CDN's serverless arch and object storage in Coot-CMS project.
+> Learned a lot abt CDN's serverless arch and object storage in Coot-CMS project. A lot about AWS in general.
 
 > Anyway this might come in handy for someone feel free to use. The code here is not proprietary. I removed everything that was.
 
