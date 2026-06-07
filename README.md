@@ -1,3 +1,21 @@
+# Author's Note
+
+> This was a small part of larger project I was built at a startup kind of a cool project.
+
+> A multi-tenant headless CMS SaaS built on AWS. (Coot-CMS)
+
+> There were more Lamdba's ->
+
+> - A key values store router that pulls from aconfig and maps /slug -> .html file on s3.
+
+> - There was a on the fly template -> actual page generator we only used on staging cz for prod we couldnt afford that 50 ms delay either. that was built on BeatifulSoap in python.
+
+> The code blocks in this just uses sharp to convert the images to a mouch more suitable size and format for higher load speeds.
+
+> Learned a lot abt CDN's serverless arch and object storage in Coot-CMS project.
+
+> Anyway this might come in handy for someone feel free to use. The code here is not proprietary. I removed everything that was.
+
 # AWS Lambda@Edge — Image Pipeline
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
