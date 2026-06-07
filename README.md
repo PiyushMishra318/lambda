@@ -20,7 +20,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A small portfolio of **Lambda@Edge** functions I built during an internship. Together they power on-the-fly image delivery: rewrite requests for WebP/resized variants at the edge, and generate missing variants from S3 when the CDN returns a 404.
+A small portfolio of **Lambda@Edge** functions I built. Together they power on-the-fly image delivery: rewrite requests for WebP/resized variants at the edge, and generate missing variants from S3 when the CDN returns a 404.
 
 This repo is reference code — deploy it with your own S3 bucket, CloudFront distribution, and environment variables.
 
