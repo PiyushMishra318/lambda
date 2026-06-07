@@ -1,4 +1,4 @@
-# Author's Note
+# Author's Note (NOT AI GENERATED)
 
 > This was a small part of larger project I was built at a startup kind of a cool project.
 
